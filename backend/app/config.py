@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     email_port: int
     email_username: str
     email_password: str
-
+    email_confirmation_hours : int
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
 settings = Settings()

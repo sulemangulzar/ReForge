@@ -1,6 +1,7 @@
 from sqlmodel import SQLModel
 import asyncio
 from logging.config import fileConfig
+from app.models.refresh_token import RefreshToken
 from app.models.user import Users
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
