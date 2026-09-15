@@ -1,8 +1,12 @@
 from datetime import date, datetime
 from enum import Enum
+from typing import TYPE_CHECKING
 from uuid import UUID, uuid4
 
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, Relationship, SQLModel
+
+if TYPE_CHECKING:
+    from app.models.user import Users
 
 
 class Gender(str, Enum):
@@ -26,6 +30,7 @@ class ActivityLevel(str, Enum):
     SEDENTARY = "sedentary"
     LIGHT = "light"
     MODERATE = "moderate"
+    ACTIVE = "active"
     VERY_ACTIVE = "very_active"
 
 
@@ -52,3 +57,5 @@ class Profile(SQLModel, table=True):
     preferred_units: PreferredUnits
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
+
+    user: "Users" = Relationship(back_populates="profile")

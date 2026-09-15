@@ -1,8 +1,15 @@
 from datetime import datetime
 from enum import Enum
+from typing import TYPE_CHECKING
 from uuid import UUID, uuid4
 
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, Relationship, SQLModel
+
+if TYPE_CHECKING:
+    from app.models.goal import Goal
+    from app.models.profile import Profile
+    from app.models.refresh_token import RefreshToken
+    from app.models.starting_point import StartingPoint
 
 
 class UserRole(str, Enum):
@@ -21,3 +28,8 @@ class Users(SQLModel, table=True):
     is_verified: bool = False
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
+
+    profile: "Profile | None" = Relationship(back_populates="user")
+    goal: "Goal | None" = Relationship(back_populates="user")
+    refresh_tokens: list["RefreshToken"] = Relationship(back_populates="user")
+    starting_point: "StartingPoint | None" = Relationship(back_populates="user")

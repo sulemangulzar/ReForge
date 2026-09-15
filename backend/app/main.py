@@ -4,6 +4,7 @@ from scalar_fastapi import get_scalar_api_reference
 from app.api.v1.routes.auth import router as auth_router
 from app.api.v1.routes.profile import router as profile_router
 from app.api.v1.routes.goal import router as goal_router
+from app.api.v1.routes.starting_point import router as starting_point_router
 
 app = FastAPI(
     title="ReForge",
@@ -14,6 +15,7 @@ app = FastAPI(
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
 app.include_router(profile_router, tags=["profile"])
 app.include_router(goal_router, tags=["goals"])
+app.include_router(starting_point_router, tags=["starting-point"])
 
 @app.get("/")
 def health():

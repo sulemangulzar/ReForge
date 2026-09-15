@@ -1,8 +1,12 @@
 from datetime import date, datetime
 from enum import Enum
+from typing import TYPE_CHECKING
 from uuid import UUID, uuid4
 
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, Relationship, SQLModel
+
+if TYPE_CHECKING:
+    from app.models.user import Users
 
 
 class GoalType(str, Enum):
@@ -23,3 +27,5 @@ class Goal(SQLModel, table=True):
     target_date: date
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
+
+    user: "Users" = Relationship(back_populates="goal")

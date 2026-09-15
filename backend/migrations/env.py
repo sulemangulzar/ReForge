@@ -4,6 +4,7 @@ from logging.config import fileConfig
 from app.models.goal import Goal
 from app.models.profile import Profile
 from app.models.refresh_token import RefreshToken
+from app.models.starting_point import StartingPoint
 from app.models.user import Users
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
